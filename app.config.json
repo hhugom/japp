@@ -1,0 +1,7 @@
+{
+  "expo": {
+    "name": "Japp",
+    "slug": "japp",
+    "entryPoint": "./src/Entry.tsx"
+  }
+}
