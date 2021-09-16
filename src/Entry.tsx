@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { registerRootComponent } from 'expo';
 import { StyleSheet, Text, View } from 'react-native';
 
 const App: FC = () => {
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default registerRootComponent(App);
