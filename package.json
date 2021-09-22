@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/native-stack": "^6.1.0",
     "expo": "~42.0.0",
     "firebase": "8.2.3",
     "react": "16.13.1",
