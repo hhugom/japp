@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase/app';
+import 'firebase/auth';
 
 const Home: FC = () => {
   // Set an initializing state whilst Firebase connects
@@ -21,12 +22,14 @@ const Home: FC = () => {
   });
 
   if (initializing) {
-    return null;
+    <View>
+      <Text>Init</Text>
+    </View>;
   }
 
   if (!user) {
     return (
-      <View>
+      <View testID="login-container">
         <Text>Login</Text>
       </View>
     );
