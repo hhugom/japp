@@ -3,8 +3,10 @@ import { registerRootComponent } from 'expo';
 import firebase from 'firebase/app';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './screen/Home/Home';
+import { ThemeProvider } from 'styled-components/native';
+import Home from './screens/Home/Home';
 import 'firebase/auth';
+import theme from './style/theme';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAYTs3VKXzrkiKb28t94o4DfBkrDEI57A8',
@@ -22,11 +24,13 @@ const App: FC = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 

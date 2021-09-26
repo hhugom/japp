@@ -8,9 +8,8 @@ test('form submits two answers', () => {
   jest.spyOn(firebase, 'auth').mockReturnValue({
     onAuthStateChanged: () => undefined,
   } as any);
-  const { getByTestId, debug } = render(<Home />);
-  debug();
 
+  const { getByTestId } = render(<Home />);
   const el = getByTestId('login-container');
 
   expect(el).toBeDefined();

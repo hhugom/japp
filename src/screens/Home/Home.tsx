@@ -1,7 +1,17 @@
 import React, { FC, useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import styled from 'styled-components/native';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import theme from '../../style/theme';
+
+const StyledView = styled.View`
+  background-color: ${theme.colors.secondary};
+`;
+
+const StyledText = styled.Text`
+  color: ${theme.colors.main};
+`;
 
 const Home: FC = () => {
   // Set an initializing state whilst Firebase connects
@@ -22,16 +32,16 @@ const Home: FC = () => {
   });
 
   if (initializing) {
-    <View>
+    <StyledView>
       <Text>Init</Text>
-    </View>;
+    </StyledView>;
   }
 
   if (!user) {
     return (
-      <View testID="login-container">
-        <Text>Login</Text>
-      </View>
+      <StyledView testID="login-container">
+        <StyledText>Login</StyledText>
+      </StyledView>
     );
   }
 
