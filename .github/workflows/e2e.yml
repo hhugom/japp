@@ -1,0 +1,25 @@
+name: End to end on pull request
+
+on: [pull_request]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: npm install -g expo-cli
+      - run: npm install -g serve
+      - name: E2E Chrome
+        uses: cypress-io/github-action@v2
+        with:
+          build: yarn run build:ci
+          start: yarn run serve:ci
+          browser: chrome
+          config: pageLoadTimeout=100000,baseUrl=http://localhost:5000
