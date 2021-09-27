@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from 'styled-components/native';
 import Home from './screens/Home/Home';
+import { NativeBaseProvider } from 'native-base';
 import 'firebase/auth';
 import theme from './style/theme';
 
@@ -25,11 +26,13 @@ const App: FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NativeBaseProvider>
     </ThemeProvider>
   );
 };

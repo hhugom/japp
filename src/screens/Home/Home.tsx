@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'native-base';
 import styled from 'styled-components/native';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -9,7 +10,7 @@ const StyledView = styled.View`
   background-color: ${theme.colors.secondary};
 `;
 
-const StyledText = styled.Text`
+const StyledButton = styled(Button)`
   color: ${theme.colors.main};
 `;
 
@@ -40,7 +41,7 @@ const Home: FC = () => {
   if (!user) {
     return (
       <StyledView testID="login-container">
-        <StyledText>Login</StyledText>
+        <StyledButton>Login</StyledButton>
       </StyledView>
     );
   }
