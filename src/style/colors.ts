@@ -12,7 +12,7 @@ export type ColorStructure = {
 };
 
 export const colors = {
-  blue: {
+  primary: {
     50: '#f6fafd',
     100: '#e2eff9',
     200: '#cce4f5',

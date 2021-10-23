@@ -1,25 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Text } from 'react-native';
-import { Button, Input } from 'native-base';
-import styled from 'styled-components/native';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { Box } from 'native-base';
-import theme from '../../style/theme';
-
-const FormContainer = styled.View`
-  max-width: 780px;
-`;
-
-const StyledButton = styled(Button)`
-  color: ${theme.colors.blue[100]};
-  width: 100%;
-`;
-
-const StyledInput = styled(Input)`
-  margin: 15px 0;
-  width: 100%;
-`;
+import { Box, Text } from 'native-base';
+import Auth from '../Auth/Auth';
 
 const Home: FC = () => {
   // Set an initializing state whilst Firebase connects
@@ -55,24 +38,7 @@ const Home: FC = () => {
   }
 
   if (!user) {
-    return (
-      <Box
-        bg="primary.600"
-        py={4}
-        px={3}
-        rounded="md"
-        alignSelf="center"
-        width={375}
-        maxWidth="100%"
-        testID="login-container"
-      >
-        <FormContainer>
-          <StyledInput />
-          <StyledInput />
-          <StyledButton>Login</StyledButton>
-        </FormContainer>
-      </Box>
-    );
+    return <Auth />;
   }
 
   return (

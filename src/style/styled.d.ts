@@ -8,7 +8,7 @@ import { SizesStructure } from './sizes';
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
-      blue: ColorStructure;
+      primary: ColorStructure;
       violet: ColorStructure;
       teal: ColorStructure;
     };
