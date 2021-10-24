@@ -23,24 +23,24 @@ export const ClassicAuthSteps: FC = () => {
   const inputs = {
     [ClassicAuthStepsEnum.EMAIL]: (
       <AuthInput
+        width="250px"
         key={ClassicAuthStepsEnum.EMAIL}
         placeholder="Email"
-        onChange={onChange}
-        step={ClassicAuthStepsEnum.EMAIL}
+        onChangeText={onChange}
       />
     ),
     [ClassicAuthStepsEnum.PASSWORD]: (
       <AuthInput
+        width="250px"
         key={ClassicAuthStepsEnum.PASSWORD}
         placeholder="Password"
-        onChange={onChange}
-        step={ClassicAuthStepsEnum.PASSWORD}
+        onChangeText={onChange}
       />
     ),
   };
 
   return (
-    <Box flexDir="row" width="100%">
+    <Box flexDir="row" width="100%" position="relative" justifyContent="center">
       {inputs[currentStep]}
       <Button
         ml={2}
@@ -48,6 +48,8 @@ export const ClassicAuthSteps: FC = () => {
         rounded={0}
         height="100%"
         onPress={onNextStepClick}
+        position="absolute"
+        right={-4}
       >
         <AntDesign
           name="arrowright"

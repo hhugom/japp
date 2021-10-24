@@ -4,7 +4,7 @@ import './lib/firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { Stack } from './lib/react-navigation';
 import { ThemeProvider } from 'styled-components/native';
-import Home from './feature/Home/Home';
+import { Home } from './feature/Home/Home';
 import { SignUp, Signin } from './feature/Auth';
 import { extendTheme, NativeBaseProvider } from 'native-base';
 import { theme } from './style';

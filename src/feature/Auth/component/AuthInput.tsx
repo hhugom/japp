@@ -1,13 +1,14 @@
-import { Input } from 'native-base';
+import { IInputProps, Input } from 'native-base';
 import React, { FC } from 'react';
-import { ClassicAuthStepsEnum } from './ClassicAuthSteps/constant';
 
 type AuthInputProps = {
   placeholder: string;
-  onChange: (value: string) => void;
-  step: ClassicAuthStepsEnum;
 };
-export const AuthInput: FC<AuthInputProps> = ({ placeholder, onChange }) => {
+
+export const AuthInput: FC<AuthInputProps & IInputProps> = ({
+  placeholder,
+  ...props
+}) => {
   return (
     <Input
       size="2xl"
@@ -15,9 +16,10 @@ export const AuthInput: FC<AuthInputProps> = ({ placeholder, onChange }) => {
       color="primary.regular"
       variant="filled"
       placeholder={placeholder}
-      onChangeText={onChange}
       rounded="0"
-      flexGrow={2}
+      width="250px"
+      maxWidth="100%"
+      {...props}
     />
   );
 };

@@ -1,8 +1,7 @@
-import React, { FC } from 'react';
-import 'firebase/auth';
+import React from 'react';
 import { Box, Text } from 'native-base';
 
-const Home: FC = () => {
+export const Home = () => {
   return (
     <Box
       bg="primary.600"
@@ -18,5 +17,3 @@ const Home: FC = () => {
     </Box>
   );
 };
-
-export default Home;
