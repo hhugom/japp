@@ -1,46 +1,31 @@
-export type TypographyStructure = {
-  fontWeights: {
-    hairline: number;
-    thin: number;
-    light: number;
-    normal: number;
-    medium: number;
-    semibold: number;
-    bold: number;
-    extrabold: number;
-    black: number;
-    extrablack: number;
-  };
-  fontSizes: {
-    '2xs': number;
-    xs: number;
-    sm: number;
-    md: number;
-    lg: number;
-    xl: number;
-    '2xl': number;
-    '3xl': number;
-    '4xl': number;
-    '5xl': number;
-    '6xl': number;
-    '7xl': number;
-    '8xl': number;
-    '9xl': number;
-  };
+export type FontWeightStructure = {
+  light: number;
+  normal: number;
+  bold: number;
+};
+
+export type FontSizeStructure = {
+  '2xs': number;
+  xs: number;
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+  '2xl': number;
+  '3xl': number;
+  '4xl': number;
+  '5xl': number;
+  '6xl': number;
+  '7xl': number;
+  '8xl': number;
+  '9xl': number;
 };
 
 export const typography = {
   fontWeights: {
-    hairline: 100,
-    thin: 200,
     light: 300,
-    normal: 400,
-    medium: 500,
-    semibold: 600,
+    normal: 500,
     bold: 700,
-    extrabold: 800,
-    black: 900,
-    extrablack: 950,
   },
   fontSizes: {
     '2xs': 10,

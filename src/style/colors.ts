@@ -1,51 +1,33 @@
 export type ColorStructure = {
-  50: string;
-  100: string;
-  200: string;
-  300: string;
-  400: string;
-  500: string;
-  600: string;
-  700: string;
-  800: string;
-  900: string;
+  regular: string;
+  light: string;
+  dark: string;
 };
 
 export const colors = {
   primary: {
-    50: '#f6fafd',
-    100: '#e2eff9',
-    200: '#cce4f5',
-    300: '#b5d8f0',
-    400: '#9bcaeb',
-    500: '#7dbae5',
-    600: '#5aa7de',
-    700: '#2d8fd5',
-    800: '#006fbe',
-    900: '#004170',
+    light: '#EBF8FF',
+    regular: '#ADE1FF',
+    dark: '#70CBFF',
   },
-  violet: {
-    50: '#fbf8fe',
-    100: '#f1ebfb',
-    200: '#e8dcf8',
-    300: '#ddccf5',
-    400: '#d1baf1',
-    500: '#c4a6ed',
-    600: '#b48ee8',
-    700: '#a172e3',
-    800: '#864adb',
-    900: '#4c00b8',
+  secondary: {
+    light: '#4E567E',
+    regular: '#24283B',
+    dark: '#101119',
   },
-  teal: {
-    50: '#f1fcf6',
-    100: '#d2f6e1',
-    200: '#afefc9',
-    300: '#85e7ae',
-    400: '#52dc8b',
-    500: '#0ace5c',
-    600: '#00b84d',
-    700: '#009e42',
-    800: '#007d34',
-    900: '#004a1f',
+  headings: {
+    light: '#F2ECFD',
+    regular: '#CCB4F8',
+    dark: '#A67CF3',
+  },
+  success: {
+    light: '#D3F3CE',
+    regular: '#9EE493',
+    dark: '#7BDA6C',
+  },
+  error: {
+    light: '#E79C9C',
+    regular: '#DB6B6B',
+    dark: '#CF3A3A',
   },
 };

@@ -1,7 +1,7 @@
 // import original module declarations
 import 'styled-components';
 import { ColorStructure } from './colors';
-import { TypographyStructure } from './typography';
+import { FontSizeStructure, FontWeightStructure } from './typography';
 import { SizesStructure } from './sizes';
 
 // and extend them!
@@ -9,10 +9,13 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
       primary: ColorStructure;
-      violet: ColorStructure;
-      teal: ColorStructure;
+      secondary: ColorStructure;
+      success: ColorStructure;
+      error: ColorStructure;
+      headings: ColorStructure;
     };
-    typography: TypographyStructure;
+    fontSizes: FontSizeStructure;
+    fontWeights: FontWeightStructure;
     sizes: SizesStructure;
   }
 }

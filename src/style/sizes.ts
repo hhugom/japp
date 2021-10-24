@@ -33,7 +33,7 @@ export type SizesStructure = {
   '1/4': string;
 };
 
-export const sizes = {
+export const sizes: SizesStructure = {
   px: '1px',
   '0': 0,
   '0.5': 2,
