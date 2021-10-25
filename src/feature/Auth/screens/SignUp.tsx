@@ -1,16 +1,19 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Box, Button, Text } from 'native-base';
+import { Box, Button, Text, FormControl } from 'native-base';
 import React, { useState, FC } from 'react';
 import { RootStackParamList } from '../../../types/navigation';
 import { AuthInput } from '../component/AuthInput';
 import { AuthLayout } from '../component/AuthLayout';
+import { validateEmail } from '../utils/validateEmail';
 
 type SignUProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 export const SignUp: FC<SignUProps> = ({ navigation }) => {
-  const [, setEmail] = useState<string>();
-  const [, setPassword] = useState<string>();
-  const [, setConfirmPassword] = useState<string>();
+  const [email, setEmail] = useState<string>('');
+  const [, setPassword] = useState<string>('');
+  const [, setConfirmPassword] = useState<string>('');
+
+  const isValidEmail = email ? validateEmail(email) : true;
 
   return (
     <AuthLayout text="Création de compte">
@@ -23,7 +26,15 @@ export const SignUp: FC<SignUProps> = ({ navigation }) => {
         testID="login-container"
         alignItems="center"
       >
-        <AuthInput onChangeText={setEmail} placeholder="Email" mb={6} />
+        <FormControl width="250px" isInvalid={!isValidEmail} mb={6}>
+          <AuthInput onChangeText={setEmail} placeholder="Email" />
+          <FormControl.ErrorMessage position="absolute" bottom={-20} left="0">
+            <Text fontSize="xs" color="error.regular">
+              Please use a valid email
+            </Text>
+          </FormControl.ErrorMessage>
+        </FormControl>
+
         <AuthInput onChangeText={setPassword} placeholder="Password" mb={6} />
         <AuthInput
           onChangeText={setConfirmPassword}
