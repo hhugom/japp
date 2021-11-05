@@ -1,10 +1,12 @@
 {
   "dependencies": {
     "@expo/vector-icons": "12.0.5",
+    "@hookform/resolvers": "^2.8.3",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "expo": "~42.0.0",
     "firebase": "8.2.3",
+    "joi": "^17.4.2",
     "native-base": "^3.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
