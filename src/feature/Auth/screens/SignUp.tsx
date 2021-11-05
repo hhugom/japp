@@ -1,12 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Box, Button, Text } from 'native-base';
 import React, { FC } from 'react';
 import { RootStackParamList } from '../../../types/navigation';
-import { AuthInput } from '../component/AuthInput';
 import { AuthLayout } from '../component/AuthLayout';
+import { ControledInput } from '../../../component/ControledInput';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
+import { InputContainer } from '../../../component/InputContainer';
+import { useSignupWithEmailAndPassword } from '../api/signupWithEmailAndPassword';
 
 type SignUProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -16,24 +18,28 @@ type FormData = {
   confirmPassword: string;
 };
 
-export const SignUp: FC<SignUProps> = ({ navigation }) => {
-  const schema = Joi.object<FormData>({
-    email: Joi.string()
-      .email({ tlds: { allow: false } })
-      .required(),
-    password: Joi.string().regex(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/
-    ),
-    confirmPassword: Joi.ref('password'),
-  });
+const schema = Joi.object<FormData>({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
+  password: Joi.string().regex(
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/
+  ),
+  confirmPassword: Joi.ref('password'),
+});
 
+export const SignUp: FC<SignUProps> = ({ navigation }) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: joiResolver(schema) });
 
-  const onSubmit = (data: FormData) => console.log(data);
+  const { signupWithEmailAndPassword } = useSignupWithEmailAndPassword();
+
+  const onSubmit = (data: FormData) => {
+    signupWithEmailAndPassword({ email: data.email, password: data.password });
+  };
 
   return (
     <AuthLayout text="Création de compte">
@@ -46,72 +52,33 @@ export const SignUp: FC<SignUProps> = ({ navigation }) => {
         testID="login-container"
         alignItems="center"
       >
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Box mb="6">
-              <AuthInput
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Email"
-              />
-              {errors.email && (
-                <Text color="error.regular">{errors.email?.message}</Text>
-              )}
-            </Box>
-          )}
-          name="email"
-          defaultValue=""
-        />
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Box mb="6">
-              <AuthInput
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Password"
-              />
-              {errors.password && (
-                <Text color="error.regular">{errors.password.message}</Text>
-              )}
-            </Box>
-          )}
-          name="password"
-          defaultValue=""
-        />
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Box mb="6">
-              <AuthInput
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Confirm password"
-              />
-              {errors.confirmPassword && (
-                <Text color="error.regular">
-                  {errors.confirmPassword.message}
-                </Text>
-              )}
-            </Box>
-          )}
-          name="confirmPassword"
-          defaultValue=""
-        />
+        <InputContainer
+          hasError={!!errors.email}
+          errorText="You must use a valid email"
+        >
+          <ControledInput control={control} name="email" placeholder="Email" />
+        </InputContainer>
+        <InputContainer
+          hasError={!!errors.password}
+          errorText="You should use a valid password"
+        >
+          <ControledInput
+            control={control}
+            name="password"
+            placeholder="Password"
+          />
+        </InputContainer>
 
+        <InputContainer
+          hasError={!!errors.confirmPassword}
+          errorText="It does not match your password"
+        >
+          <ControledInput
+            control={control}
+            name="confirmPassword"
+            placeholder="Confirm password"
+          />
+        </InputContainer>
         <Button
           rounded={0}
           px={6}
