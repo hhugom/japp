@@ -1,16 +1,45 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Box, Button, Text } from 'native-base';
-import React, { useState, FC } from 'react';
-import { RootStackParamList } from '../../../types/navigation';
-import { AuthInput } from '../component/AuthInput';
+import { useForm } from 'react-hook-form';
+import { Box } from 'native-base';
+import React, { FC } from 'react';
 import { AuthLayout } from '../component/AuthLayout';
+import { ControledInput } from '../../../component/ControledInput';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
+import { InputContainer } from '../../../component/InputContainer';
+import { useSignupWithEmailAndPassword } from '../api/signupWithEmailAndPassword';
+import { DefaultButton } from '../../../component/DefaultButton';
 
 type SignUProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
+type FormData = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+const schema = Joi.object<FormData>({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
+  password: Joi.string().regex(
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/
+  ),
+  confirmPassword: Joi.ref('password'),
+});
+
 export const SignUp: FC<SignUProps> = ({ navigation }) => {
-  const [, setEmail] = useState<string>();
-  const [, setPassword] = useState<string>();
-  const [, setConfirmPassword] = useState<string>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: joiResolver(schema) });
+
+  const { signupWithEmailAndPassword } = useSignupWithEmailAndPassword();
+
+  const onSubmit = (data: FormData) => {
+    signupWithEmailAndPassword({ email: data.email, password: data.password });
+  };
 
   return (
     <AuthLayout text="Création de compte">
@@ -23,29 +52,45 @@ export const SignUp: FC<SignUProps> = ({ navigation }) => {
         testID="login-container"
         alignItems="center"
       >
-        <AuthInput onChangeText={setEmail} placeholder="Email" mb={6} />
-        <AuthInput onChangeText={setPassword} placeholder="Password" mb={6} />
-        <AuthInput
-          onChangeText={setConfirmPassword}
-          placeholder="Confirm pasword"
-          mb={6}
-        />
-        <Button rounded={0} px={6} py={3} maxWidth="100%" width="250px" my={6}>
-          Créer mon compte
-        </Button>
-        <Button
-          rounded={0}
-          py={3}
-          px={0}
+        <InputContainer
+          hasError={!!errors.email}
+          errorText="You must use a valid email"
+        >
+          <ControledInput control={control} name="email" placeholder="Email" />
+        </InputContainer>
+        <InputContainer
+          hasError={!!errors.password}
+          errorText="You should use a valid password"
+        >
+          <ControledInput
+            control={control}
+            name="password"
+            placeholder="Password"
+          />
+        </InputContainer>
+
+        <InputContainer
+          hasError={!!errors.confirmPassword}
+          errorText="It does not match your password"
+        >
+          <ControledInput
+            control={control}
+            name="confirmPassword"
+            placeholder="Confirm password"
+          />
+        </InputContainer>
+        <DefaultButton
+          text="Créer mon compte"
           maxWidth="100%"
+          width="250px"
           mb={6}
+          onPress={handleSubmit(onSubmit)}
+        />
+        <DefaultButton
           onPress={() => navigation.navigate('SignIn')}
           variant="ghost"
-        >
-          <Text fontSize="lg" fontWeight="bold" color="primary.regular">
-            J'ai déjà un compte
-          </Text>
-        </Button>
+          text="J'ai déjà un compte"
+        />
       </Box>
     </AuthLayout>
   );

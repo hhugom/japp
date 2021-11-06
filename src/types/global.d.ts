@@ -1,1 +1,1 @@
-export type StringMap<T> = { [key: string]: T };
+declare type StringMap<T> = { [key: string]: T };
