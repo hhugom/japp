@@ -1,14 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useForm } from 'react-hook-form';
-import { Box, Button, Text } from 'native-base';
+import { Box } from 'native-base';
 import React, { FC } from 'react';
-import { RootStackParamList } from '../../../types/navigation';
 import { AuthLayout } from '../component/AuthLayout';
 import { ControledInput } from '../../../component/ControledInput';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import { InputContainer } from '../../../component/InputContainer';
 import { useSignupWithEmailAndPassword } from '../api/signupWithEmailAndPassword';
+import { DefaultButton } from '../../../component/DefaultButton';
 
 type SignUProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -79,30 +79,18 @@ export const SignUp: FC<SignUProps> = ({ navigation }) => {
             placeholder="Confirm password"
           />
         </InputContainer>
-        <Button
-          rounded={0}
-          px={6}
-          py={3}
+        <DefaultButton
+          text="Créer mon compte"
           maxWidth="100%"
           width="250px"
           mb={6}
           onPress={handleSubmit(onSubmit)}
-        >
-          Créer mon compte
-        </Button>
-        <Button
-          rounded={0}
-          py={3}
-          px={0}
-          maxWidth="100%"
-          mb={6}
+        />
+        <DefaultButton
           onPress={() => navigation.navigate('SignIn')}
           variant="ghost"
-        >
-          <Text fontSize="lg" fontWeight="bold" color="primary.regular">
-            J'ai déjà un compte
-          </Text>
-        </Button>
+          text="J'ai déjà un compte"
+        />
       </Box>
     </AuthLayout>
   );

@@ -1,4 +1,4 @@
-export type RootStackParamList = {
+declare type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   Home: undefined;
