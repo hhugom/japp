@@ -1,4 +1,4 @@
-import './lib/firebase';
+import './lib/firebase/firebase-app';
 import React, { FC, useEffect, useState } from 'react';
 import { registerRootComponent } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,11 +8,9 @@ import { Home } from './feature/Home/Home';
 import { SignUp, Signin } from './feature/Auth';
 import { extendTheme, NativeBaseProvider } from 'native-base';
 import { theme } from './style';
-import { getAuth } from '@firebase/auth';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { SplashScreen } from './component/SplashScreen/SplashScreen';
 import { User } from '@firebase/auth';
-import { firebaseApp } from './lib/firebase';
+import { auth } from './lib/firebase';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -32,14 +30,9 @@ const App: FC = () => {
   }
 
   useEffect(() => {
-    const subscriber =
-      getAuth(firebaseApp).onAuthStateChanged(onAuthStateChanged);
+    const subscriber = auth.onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   });
-
-  if (initializing) {
-    return <SplashScreen />;
-  }
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -4,8 +4,8 @@ import { Box } from 'native-base';
 import React, { FC } from 'react';
 import { AuthLayout } from '../component/AuthLayout';
 import { ControledInput } from '../../../component/ControledInput';
-import { joiResolver } from '@hookform/resolvers/joi';
-import Joi from 'joi';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 import { InputContainer } from '../../../component/InputContainer';
 import { useSignupWithEmailAndPassword } from '../api/signupWithEmailAndPassword';
 import { DefaultButton } from '../../../component/DefaultButton';
@@ -18,14 +18,14 @@ type FormData = {
   confirmPassword: string;
 };
 
-const schema = Joi.object<FormData>({
-  email: Joi.string()
+const schema = Yup.object({
+  email: Yup.string()
     .email({ tlds: { allow: false } })
     .required(),
-  password: Joi.string().regex(
+  password: Yup.string().matches(
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/
   ),
-  confirmPassword: Joi.ref('password'),
+  confirmPassword: Yup.ref('password'),
 });
 
 export const SignUp: FC<SignUProps> = ({ navigation }) => {
@@ -33,7 +33,7 @@ export const SignUp: FC<SignUProps> = ({ navigation }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: joiResolver(schema) });
+  } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   const { signupWithEmailAndPassword } = useSignupWithEmailAndPassword();
 

@@ -1,9 +1,6 @@
-import {
-  signInWithEmailAndPassword as signInWithEmailAndPasswordApi,
-  getAuth,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword as signInWithEmailAndPasswordApi } from 'firebase/auth';
 import { useMutation } from 'react-query';
-import { firebaseApp } from '../../../lib/firebase';
+import { auth } from '../../../lib/firebase';
 
 export const useSigninWithEmailAndPassword = ({
   onSuccess,
@@ -11,7 +8,6 @@ export const useSigninWithEmailAndPassword = ({
 }: MutationHookParameters = {}) => {
   const { mutate: signInWithEmailAndPassword, ...rest } = useMutation(
     ({ email, password }: { email: string; password: string }) => {
-      const auth = getAuth(firebaseApp);
       return signInWithEmailAndPasswordApi(auth, email, password);
     },
     { onSuccess, onError }

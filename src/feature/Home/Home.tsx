@@ -3,7 +3,7 @@ import { Box, Text } from 'native-base';
 import { DefaultButton } from '../../component/DefaultButton';
 import { useSignOut } from '../../api/signOut';
 import { getAuth } from '@firebase/auth';
-import { firebaseApp } from '../../lib/firebase';
+import { firebaseApp } from '../../lib/firebase/firebase-app';
 
 export const Home: FC = () => {
   const { signOut } = useSignOut();
