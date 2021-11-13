@@ -19,12 +19,7 @@ export const AuthLayout: FC<AuthLayoutProps> = ({ children, text }) => {
       alignItems="center"
       p={4}
     >
-      <Heading
-        fontSize="7xl"
-        pb={10}
-        justifySelf="flex-end"
-        color="primary.light"
-      >
+      <Heading fontSize="7xl" pb={10} color="primary.light">
         JAPP
       </Heading>
       <Heading textAlign="left" color="headings.regular" fontSize="xl" mb={6}>
