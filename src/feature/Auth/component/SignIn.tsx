@@ -1,13 +1,12 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Box, Button, Text } from 'native-base';
 import React, { FC } from 'react';
-import { AuthLayout } from '../component/AuthLayout';
-import { ClassicSignin } from '../component/ClassicSignin';
-import { GoogleSignin } from '../component/GoogleSignin';
+import { useNavigate } from 'react-router';
+import { AuthLayout } from './AuthLayout';
+import { ClassicSignin } from './ClassicSignin';
+import { GoogleSignin } from './GoogleSignin';
 
-type SigninProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
-
-export const Signin: FC<SigninProps> = ({ navigation }) => {
+export const Signin: FC = () => {
+  const navigate = useNavigate();
   return (
     <AuthLayout text="Connexion">
       <Box maxWidth="100%" width="350px" alignItems="center">
@@ -19,8 +18,8 @@ export const Signin: FC<SigninProps> = ({ navigation }) => {
           px={0}
           maxWidth="100%"
           mb={6}
-          onPress={() => navigation.navigate('SignUp')}
           variant="ghost"
+          onPress={() => navigate('/signup')}
         >
           <Text fontSize="lg" fontWeight="bold" color="primary.regular">
             Créer un compte

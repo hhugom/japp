@@ -2,10 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import React, { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { ControledInput } from '../../../component/ControledInput';
-import { DefaultButton } from '../../../component/DefaultButton';
-import { InputContainer } from '../../../component/InputContainer';
 import { useSigninWithEmailAndPassword } from '../api/signinWithEmailAndPassword';
+import { ControledInput } from 'Src/component/ControledInput';
+import { DefaultButton } from 'Src/component/DefaultButton';
+import { InputContainer } from 'Src/component/InputContainer';
 
 type FormData = {
   email: string;

@@ -1,8 +1,8 @@
 import { useMutation } from 'react-query';
 import * as WebBrowser from 'expo-web-browser';
 import { GoogleAuthProvider, signInWithCredential } from '@firebase/auth';
-import { auth } from '../../../lib/firebase';
 import { AuthRequestPromptOptions, AuthSessionResult } from 'expo-auth-session';
+import { auth } from 'Src/lib/firebase';
 
 // Only for authentication on web browser
 WebBrowser.maybeCompleteAuthSession();

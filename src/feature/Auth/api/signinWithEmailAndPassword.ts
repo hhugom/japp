@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword as signInWithEmailAndPasswordApi } from 'firebase/auth';
 import { useMutation } from 'react-query';
-import { auth } from '../../../lib/firebase';
+import { auth } from 'Src/lib/firebase';
 
 export const useSigninWithEmailAndPassword = ({
   onSuccess,
