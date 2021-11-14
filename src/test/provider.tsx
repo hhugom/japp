@@ -1,4 +1,4 @@
-import { extendTheme, NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider, extendTheme } from 'native-base';
 import React, { FC } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { theme } from '../style';

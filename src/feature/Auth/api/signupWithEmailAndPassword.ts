@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useMutation } from 'react-query';
-import { auth } from '../../../lib/firebase';
+import { auth } from 'Src/lib/firebase';
 
 export const useSignupWithEmailAndPassword = ({
   onSuccess,

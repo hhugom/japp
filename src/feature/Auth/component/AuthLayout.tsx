@@ -1,4 +1,4 @@
-import { Box, Heading } from 'native-base';
+import { Heading, KeyboardAvoidingView } from 'native-base';
 import React, { FC } from 'react';
 
 type AuthLayoutProps = {
@@ -8,7 +8,7 @@ type AuthLayoutProps = {
 
 export const AuthLayout: FC<AuthLayoutProps> = ({ children, text }) => {
   return (
-    <Box
+    <KeyboardAvoidingView
       bg="secondary.regular"
       pt={4}
       alignSelf="center"
@@ -26,6 +26,6 @@ export const AuthLayout: FC<AuthLayoutProps> = ({ children, text }) => {
         ▪ ▪ {text} ▪ ▪
       </Heading>
       {children}
-    </Box>
+    </KeyboardAvoidingView>
   );
 };

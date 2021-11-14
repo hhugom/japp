@@ -1,16 +1,14 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useForm } from 'react-hook-form';
 import { Box } from 'native-base';
 import React, { FC } from 'react';
-import { AuthLayout } from '../component/AuthLayout';
-import { ControledInput } from '../../../component/ControledInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { InputContainer } from '../../../component/InputContainer';
+import { useNavigate } from 'react-router';
 import { useSignupWithEmailAndPassword } from '../api/signupWithEmailAndPassword';
-import { DefaultButton } from '../../../component/DefaultButton';
-
-type SignUProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
+import { AuthLayout } from './AuthLayout';
+import { ControledInput } from 'Src/component/ControledInput';
+import { InputContainer } from 'Src/component/InputContainer';
+import { DefaultButton } from 'Src/component/DefaultButton';
 
 type FormData = {
   email: string;
@@ -28,13 +26,13 @@ const schema = Yup.object({
   confirmPassword: Yup.ref('password'),
 });
 
-export const SignUp: FC<SignUProps> = ({ navigation }) => {
+export const SignUp: FC = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
-
+  const navigate = useNavigate();
   const { signupWithEmailAndPassword } = useSignupWithEmailAndPassword();
 
   const onSubmit = (data: FormData) => {
@@ -87,9 +85,9 @@ export const SignUp: FC<SignUProps> = ({ navigation }) => {
           onPress={handleSubmit(onSubmit)}
         />
         <DefaultButton
-          onPress={() => navigation.navigate('SignIn')}
           variant="ghost"
           text="J'ai déjà un compte"
+          onPress={() => navigate('/signin')}
         />
       </Box>
     </AuthLayout>
