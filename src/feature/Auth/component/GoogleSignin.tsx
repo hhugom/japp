@@ -7,7 +7,7 @@ export const GoogleSignin: FC = () => {
     clientId:
       '857205036087-05kp90rufhrpt25m4sn8m2tlvn6snh9e.apps.googleusercontent.com',
   });
-  const { signinWithGoogle } = useSigninWithGoogle({ googleAuth });
+  const { signinWithGoogle, isLoading } = useSigninWithGoogle({ googleAuth });
 
   return (
     <DefaultButton
@@ -16,6 +16,7 @@ export const GoogleSignin: FC = () => {
       width="250px"
       onPress={() => signinWithGoogle()}
       text="Google"
+      isLoading={isLoading}
     />
   );
 };

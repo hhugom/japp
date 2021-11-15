@@ -25,7 +25,8 @@ export const ClassicSignin: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
-  const { signInWithEmailAndPassword } = useSigninWithEmailAndPassword();
+  const { signInWithEmailAndPassword, isLoading } =
+    useSigninWithEmailAndPassword();
   const onSubmit = useCallback(
     (data: FormData) => {
       signInWithEmailAndPassword({
@@ -39,6 +40,7 @@ export const ClassicSignin: FC = () => {
     <>
       <InputContainer hasError={!!errors.email} errorText="Invalid email">
         <ControledInput
+          isDisabled={isLoading}
           control={control}
           width="250px"
           key="email"
@@ -48,9 +50,11 @@ export const ClassicSignin: FC = () => {
       </InputContainer>
       <InputContainer hasError={!!errors.password} errorText="Invalid password">
         <ControledInput
+          isDisabled={isLoading}
           control={control}
           width="250px"
           key="password"
+          type="password"
           placeholder="Password"
           name="password"
         />
@@ -60,6 +64,7 @@ export const ClassicSignin: FC = () => {
         maxWidth="100%"
         width="250px"
         text="Connexion"
+        isLoading={isLoading}
         onPress={handleSubmit(onSubmit)}
       />
     </>

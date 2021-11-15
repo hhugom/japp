@@ -33,7 +33,8 @@ export const SignUp: FC = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
-  const { signupWithEmailAndPassword } = useSignupWithEmailAndPassword();
+  const { signupWithEmailAndPassword, isLoading } =
+    useSignupWithEmailAndPassword();
 
   const onSubmit = (data: FormData) => {
     signupWithEmailAndPassword({ email: data.email, password: data.password });
@@ -54,14 +55,21 @@ export const SignUp: FC = () => {
           hasError={!!errors.email}
           errorText="You must use a valid email"
         >
-          <ControledInput control={control} name="email" placeholder="Email" />
+          <ControledInput
+            isDisabled={isLoading}
+            control={control}
+            name="email"
+            placeholder="Email"
+          />
         </InputContainer>
         <InputContainer
           hasError={!!errors.password}
           errorText="You should use a valid password"
         >
           <ControledInput
+            isDisabled={isLoading}
             control={control}
+            type="password"
             name="password"
             placeholder="Password"
           />
@@ -72,6 +80,8 @@ export const SignUp: FC = () => {
           errorText="It does not match your password"
         >
           <ControledInput
+            isDisabled={isLoading}
+            type="password"
             control={control}
             name="confirmPassword"
             placeholder="Confirm password"
@@ -83,6 +93,7 @@ export const SignUp: FC = () => {
           width="250px"
           mb={6}
           onPress={handleSubmit(onSubmit)}
+          isLoading={isLoading}
         />
         <DefaultButton
           variant="ghost"
