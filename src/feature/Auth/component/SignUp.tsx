@@ -20,10 +20,14 @@ const schema = Yup.object({
   email: Yup.string()
     .email({ tlds: { allow: false } })
     .required(),
-  password: Yup.string().matches(
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/
-  ),
-  confirmPassword: Yup.ref('password'),
+  password: Yup.string()
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/
+    )
+    .required(),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null])
+    .required(),
 });
 
 export const SignUp: FC = () => {
@@ -56,6 +60,8 @@ export const SignUp: FC = () => {
           errorText="You must use a valid email"
         >
           <ControledInput
+            autoCompleteType="off"
+            importantForAutofill="no"
             isDisabled={isLoading}
             control={control}
             name="email"
@@ -67,6 +73,8 @@ export const SignUp: FC = () => {
           errorText="You should use a valid password"
         >
           <ControledInput
+            autoCompleteType="off"
+            importantForAutofill="no"
             isDisabled={isLoading}
             control={control}
             type="password"
@@ -80,6 +88,8 @@ export const SignUp: FC = () => {
           errorText="It does not match your password"
         >
           <ControledInput
+            autoCompleteType="off"
+            importantForAutofill="no"
             isDisabled={isLoading}
             type="password"
             control={control}

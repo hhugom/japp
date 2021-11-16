@@ -18,7 +18,10 @@ export const ControledInput: FC<ControlledInputProps & IInputProps> = ({
       rules={{
         required: true,
       }}
-      render={({ field: { onChange, onBlur, value } }) => (
+      render={({
+        field: { onChange, onBlur, value },
+        formState: { errors },
+      }) => (
         <Input
           size="2xl"
           bgColor="secondary.light"
@@ -27,6 +30,8 @@ export const ControledInput: FC<ControlledInputProps & IInputProps> = ({
           rounded="0"
           width="250px"
           maxWidth="100%"
+          borderWidth={errors[name] ? '2' : ''}
+          borderColor={errors[name] ? 'error.regular' : ''}
           defaultValue={value}
           onChangeText={onChange}
           onBlur={onBlur}
