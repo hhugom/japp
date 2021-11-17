@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { Box } from 'native-base';
-import React, { FC } from 'react';
+import { Box, Button, HStack, QuestionIcon, Tooltip } from 'native-base';
+import React, { FC, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router';
@@ -39,7 +39,7 @@ export const SignUp: FC = () => {
   const navigate = useNavigate();
   const { signupWithEmailAndPassword, isLoading } =
     useSignupWithEmailAndPassword();
-
+  const [isTooltipOpen, setisTooltipOpen] = useState(false);
   const onSubmit = (data: FormData) => {
     signupWithEmailAndPassword({ email: data.email, password: data.password });
   };
@@ -72,15 +72,38 @@ export const SignUp: FC = () => {
           hasError={!!errors.password}
           errorText="You should use a valid password"
         >
-          <ControledInput
-            autoCompleteType="off"
-            importantForAutofill="no"
-            isDisabled={isLoading}
-            control={control}
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
+          <HStack alignItems="center">
+            <ControledInput
+              autoCompleteType="off"
+              importantForAutofill="no"
+              isDisabled={isLoading}
+              control={control}
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+            <Tooltip
+              placement="left"
+              label={
+                'Your password must:\n- be at least 8 caracters long \n- have a lowercase and uppercase letter\n- a number\n- a special character'
+              }
+              isOpen={isTooltipOpen}
+            >
+              <Button
+                position="absolute"
+                right="-42px"
+                p="0"
+                variant="unstyled"
+                onHoverOut={() => setisTooltipOpen(false)}
+                onHoverIn={() => setisTooltipOpen(true)}
+                onPress={() => setisTooltipOpen(!isTooltipOpen)}
+              >
+                <QuestionIcon
+                  color={isTooltipOpen ? 'primary.dark' : 'primary.regular'}
+                />
+              </Button>
+            </Tooltip>
+          </HStack>
         </InputContainer>
 
         <InputContainer
@@ -100,7 +123,7 @@ export const SignUp: FC = () => {
         <DefaultButton
           text="Créer mon compte"
           maxWidth="100%"
-          width="250px"
+          width="280px"
           mb={6}
           onPress={handleSubmit(onSubmit)}
           isLoading={isLoading}

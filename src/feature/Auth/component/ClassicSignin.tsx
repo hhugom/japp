@@ -42,7 +42,7 @@ export const ClassicSignin: FC = () => {
         <ControledInput
           isDisabled={isLoading}
           control={control}
-          width="250px"
+          width="280px"
           key="email"
           placeholder="Email"
           name="email"
@@ -52,7 +52,7 @@ export const ClassicSignin: FC = () => {
         <ControledInput
           isDisabled={isLoading}
           control={control}
-          width="250px"
+          width="280px"
           key="password"
           type="password"
           placeholder="Password"
@@ -62,7 +62,7 @@ export const ClassicSignin: FC = () => {
       <DefaultButton
         mb={6}
         maxWidth="100%"
-        width="250px"
+        width="280px"
         text="Connexion"
         isLoading={isLoading}
         onPress={handleSubmit(onSubmit)}

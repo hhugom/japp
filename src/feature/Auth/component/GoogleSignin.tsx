@@ -13,7 +13,7 @@ export const GoogleSignin: FC = () => {
     <DefaultButton
       mb={6}
       maxWidth="100%"
-      width="250px"
+      width="280px"
       onPress={() => signinWithGoogle()}
       text="Google"
       isLoading={isLoading}
