@@ -19,8 +19,9 @@ export const InputContainer: FC<InputContainerProps> = ({
           position="absolute"
           textBreakStrategy="highQuality"
           left="0"
-          top="12"
+          bottom="-20"
           color="error.regular"
+          fontSize="xs"
         >
           {errorText}
         </Text>

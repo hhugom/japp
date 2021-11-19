@@ -1,20 +1,11 @@
 import { useRoutes } from 'react-router';
-import React from 'react';
-import { Home } from '../feature/Home/Home';
-import { RequireAuth } from '../hoc/requireAuth';
-import { AuthRoutes } from '../feature/Auth';
+import { AuthRoutes } from 'Src/feature/Auth';
+import { HomeRoutes } from 'Src/feature/Home';
 
 export const ApplicationRoutes = () => {
   return useRoutes([
     // These are the same as the props you provide to <Route>
-    {
-      path: '/',
-      element: (
-        <RequireAuth>
-          <Home />
-        </RequireAuth>
-      ),
-    },
+    ...HomeRoutes,
     ...AuthRoutes,
   ]);
 };

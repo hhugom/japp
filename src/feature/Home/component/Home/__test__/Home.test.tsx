@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import { Home } from '../Home';
-import { TestProvider } from '../../../test/provider';
+import { TestProvider } from 'Src/test/provider';
 
 describe('<Home />', () => {
   test('form submits two answers', () => {
