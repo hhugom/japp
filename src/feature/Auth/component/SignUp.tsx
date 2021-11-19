@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Box } from 'native-base';
+import { Box, HStack } from 'native-base';
 import React, { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -20,10 +20,10 @@ const schema = Yup.object({
   email: Yup.string()
     .email({ tlds: { allow: false } })
     .required(),
-  password: Yup.string().matches(
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/
-  ),
-  confirmPassword: Yup.ref('password'),
+  password: Yup.string().min(8).max(32).required(),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null])
+    .required(),
 });
 
 export const SignUp: FC = () => {
@@ -33,8 +33,8 @@ export const SignUp: FC = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
-  const { signupWithEmailAndPassword } = useSignupWithEmailAndPassword();
-
+  const { signupWithEmailAndPassword, isLoading } =
+    useSignupWithEmailAndPassword();
   const onSubmit = (data: FormData) => {
     signupWithEmailAndPassword({ email: data.email, password: data.password });
   };
@@ -54,17 +54,30 @@ export const SignUp: FC = () => {
           hasError={!!errors.email}
           errorText="You must use a valid email"
         >
-          <ControledInput control={control} name="email" placeholder="Email" />
+          <ControledInput
+            autoCompleteType="off"
+            importantForAutofill="no"
+            isDisabled={isLoading}
+            control={control}
+            name="email"
+            placeholder="Email"
+          />
         </InputContainer>
         <InputContainer
           hasError={!!errors.password}
-          errorText="You should use a valid password"
+          errorText="Your password must be at least 8 characters"
         >
-          <ControledInput
-            control={control}
-            name="password"
-            placeholder="Password"
-          />
+          <HStack alignItems="center">
+            <ControledInput
+              autoCompleteType="off"
+              importantForAutofill="no"
+              isDisabled={isLoading}
+              control={control}
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+          </HStack>
         </InputContainer>
 
         <InputContainer
@@ -72,6 +85,10 @@ export const SignUp: FC = () => {
           errorText="It does not match your password"
         >
           <ControledInput
+            autoCompleteType="off"
+            importantForAutofill="no"
+            isDisabled={isLoading}
+            type="password"
             control={control}
             name="confirmPassword"
             placeholder="Confirm password"
@@ -80,9 +97,10 @@ export const SignUp: FC = () => {
         <DefaultButton
           text="Créer mon compte"
           maxWidth="100%"
-          width="250px"
+          width="280px"
           mb={6}
           onPress={handleSubmit(onSubmit)}
+          isLoading={isLoading}
         />
         <DefaultButton
           variant="ghost"
