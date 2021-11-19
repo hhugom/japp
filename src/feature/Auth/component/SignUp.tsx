@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { Box, Button, HStack, QuestionIcon, Tooltip } from 'native-base';
-import React, { FC, useState } from 'react';
+import { Box, HStack } from 'native-base';
+import React, { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router';
@@ -20,11 +20,7 @@ const schema = Yup.object({
   email: Yup.string()
     .email({ tlds: { allow: false } })
     .required(),
-  password: Yup.string()
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/
-    )
-    .required(),
+  password: Yup.string().min(8).max(32).required(),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null])
     .required(),
@@ -39,7 +35,6 @@ export const SignUp: FC = () => {
   const navigate = useNavigate();
   const { signupWithEmailAndPassword, isLoading } =
     useSignupWithEmailAndPassword();
-  const [isTooltipOpen, setisTooltipOpen] = useState(false);
   const onSubmit = (data: FormData) => {
     signupWithEmailAndPassword({ email: data.email, password: data.password });
   };
@@ -70,7 +65,7 @@ export const SignUp: FC = () => {
         </InputContainer>
         <InputContainer
           hasError={!!errors.password}
-          errorText="You should use a valid password"
+          errorText="Your password must be at least 8 characters"
         >
           <HStack alignItems="center">
             <ControledInput
@@ -82,27 +77,6 @@ export const SignUp: FC = () => {
               name="password"
               placeholder="Password"
             />
-            <Tooltip
-              placement="left"
-              label={
-                'Your password must:\n- be at least 8 caracters long \n- have a lowercase and uppercase letter\n- a number\n- a special character'
-              }
-              isOpen={isTooltipOpen}
-            >
-              <Button
-                position="absolute"
-                right="-42px"
-                p="0"
-                variant="unstyled"
-                onHoverOut={() => setisTooltipOpen(false)}
-                onHoverIn={() => setisTooltipOpen(true)}
-                onPress={() => setisTooltipOpen(!isTooltipOpen)}
-              >
-                <QuestionIcon
-                  color={isTooltipOpen ? 'primary.dark' : 'primary.regular'}
-                />
-              </Button>
-            </Tooltip>
           </HStack>
         </InputContainer>
 

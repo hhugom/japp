@@ -16,6 +16,7 @@ export type SizesStructure = {
   '9': number;
   '10': number;
   '12': number;
+  '14': number;
   '16': number;
   '20': number;
   '24': number;
@@ -50,7 +51,8 @@ export const sizes: SizesStructure = {
   '8': 32,
   '9': 36,
   '10': 40,
-  '12': 52,
+  '12': 48,
+  '14': 56,
   '16': 64,
   '20': 80,
   '24': 96,
