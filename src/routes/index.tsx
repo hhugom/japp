@@ -1,7 +1,7 @@
 import { useRoutes } from 'react-router';
 import { AuthRoutes } from 'Src/feature/Auth';
 import { HomeRoutes } from 'Src/feature/Home';
-import { ParameterRoute } from 'Src/feature/UserParameters';
+import { ParameterRoute } from 'Src/feature/Settings';
 
 export const ApplicationRoutes = () => {
   return useRoutes([

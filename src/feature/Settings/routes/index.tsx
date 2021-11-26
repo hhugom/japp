@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserParameter } from '../component/UserParameter';
+import { SettingsLayout } from '../component/SettingsLayout';
 import { RequireAuth } from 'Src/hoc/requireAuth';
 
 export const ParameterRoute = [
@@ -8,7 +8,7 @@ export const ParameterRoute = [
     path: '/settings',
     element: (
       <RequireAuth>
-        <UserParameter />
+        <SettingsLayout />
       </RequireAuth>
     ),
   },

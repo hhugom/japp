@@ -23,5 +23,8 @@ export const getUser = async (): Promise<UserData> => {
 };
 
 export const useGetUser = () => {
-  return useQuery(GET_USER_KEY, getUser);
+  return useQuery(GET_USER_KEY, getUser, {
+    cacheTime: 100000,
+    staleTime: Infinity,
+  });
 };
