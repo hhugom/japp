@@ -13,12 +13,18 @@ export const SettingContainer: FC<SettingContainerProps> = ({
   return (
     <Box
       width="100%"
-      borderColor="primary.dark"
-      borderWidth="1"
+      backgroundColor="secondary.light"
       borderRadius="xs"
       p="2"
+      shadow="4"
     >
-      <Heading fontSize="l" color="headings.regular">
+      <Heading
+        fontFamily="heading"
+        fontWeight={500}
+        fontSize="lg"
+        color="headings.light"
+        pb="1"
+      >
         {title}
       </Heading>
       {children}

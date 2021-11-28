@@ -1,14 +1,18 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router';
-import { useAuth } from '../hook/useAuth';
+import { JappUser, useGetUser } from 'Src/api/getUser';
 
-export const RequireAuth = ({ children }: { children: JSX.Element }) => {
+export const RequireAuth = ({
+  children,
+}: {
+  children: (user: JappUser) => JSX.Element;
+}) => {
   const location = useLocation();
-  const user = useAuth();
+  const { data: user } = useGetUser();
 
   if (!user) {
     return <Navigate to="/signin" state={{ from: location }} />;
   }
 
-  return children;
+  return children(user);
 };

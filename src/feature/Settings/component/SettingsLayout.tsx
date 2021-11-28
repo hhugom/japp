@@ -1,8 +1,16 @@
-import { Box, Text, VStack } from 'native-base';
-import React from 'react';
+import { Text, VStack } from 'native-base';
+import React, { FC } from 'react';
 import { SettingContainer } from './SettingContainer';
+import { SettingItem } from './SettingItem';
+import { JappUser } from 'Src/api/getUser';
 
-export const SettingsLayout = () => {
+type SettingsLayoutProps = {
+  user: JappUser;
+};
+
+export const SettingsLayout: FC<SettingsLayoutProps> = ({ user }) => {
+  console.log(user);
+
   return (
     <VStack
       bg="secondary.regular"
@@ -17,13 +25,38 @@ export const SettingsLayout = () => {
       space={4}
     >
       <SettingContainer title={'Information'}>
-        <Text>Parameters</Text>
+        <Text
+          fontFamily="body"
+          fontSize="xs"
+          fontWeight={500}
+          color="primary.regular"
+        >
+          Manage your personal data like your email, your name or your profile
+          picture
+        </Text>
+        <SettingItem title="Email address" value={user.email} />
       </SettingContainer>
       <SettingContainer title={'Wanikani'}>
-        <Text>Parameters</Text>
+        <Text
+          fontFamily="body"
+          fontSize="xs"
+          fontWeight={500}
+          color="primary.regular"
+        >
+          Manage your Wanikani integration parameters
+        </Text>
+        <SettingItem title="Api key" value={user.wanikani_api_key} />
       </SettingContainer>
       <SettingContainer title={'Bunpro'}>
-        <Text>Parameters</Text>
+        <Text
+          fontFamily="body"
+          fontSize="xs"
+          fontWeight={500}
+          color="primary.regular"
+        >
+          Manage your Bunpro integration parameters
+        </Text>
+        <SettingItem title="Api key" value={user.bunpro_api_key} />
       </SettingContainer>
     </VStack>
   );

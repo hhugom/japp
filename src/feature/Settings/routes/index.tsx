@@ -7,9 +7,7 @@ export const ParameterRoute = [
   {
     path: '/settings',
     element: (
-      <RequireAuth>
-        <SettingsLayout />
-      </RequireAuth>
+      <RequireAuth>{(user) => <SettingsLayout user={user} />}</RequireAuth>
     ),
   },
 ];

@@ -3,6 +3,7 @@ import 'styled-components';
 import { ColorStructure } from './colors';
 import { FontSizeStructure, FontWeightStructure } from './typography';
 import { SizesStructure } from './sizes';
+import { FontConfigStructure, FontsStructure } from './fonts';
 
 // and extend them!
 declare module 'styled-components' {
@@ -17,5 +18,7 @@ declare module 'styled-components' {
     fontSizes: FontSizeStructure;
     fontWeights: FontWeightStructure;
     sizes: SizesStructure;
+    fonts: FontsStructure;
+    fontConfig: FontConfigStructure;
   }
 }
