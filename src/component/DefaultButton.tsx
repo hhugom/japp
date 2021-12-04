@@ -1,4 +1,4 @@
-import { Button, IButtonProps, Text, Spinner } from 'native-base';
+import { Button, IButtonProps, Spinner } from 'native-base';
 import React, { FC } from 'react';
 
 type DefaultButtonProps = {
@@ -19,17 +19,14 @@ export const DefaultButton: FC<DefaultButtonProps> = ({
       maxWidth="100%"
       height="12"
       mb={6}
+      fontSize="lg"
+      fontWeight="bold"
+      color="primary.light"
+      display="flex"
+      alignItems="center"
       {...rest}
     >
-      <Text
-        fontSize="lg"
-        fontWeight="bold"
-        color="primary.light"
-        display="flex"
-        alignItems="center"
-      >
-        {isLoading ? <Spinner color="primary.light" size="sm" /> : text}
-      </Text>
+      {isLoading ? <Spinner color="primary.light" size="lg" py={1} /> : text}
     </Button>
   );
 };

@@ -1,38 +1,56 @@
-import { Divider, Heading, Text, VStack } from 'native-base';
+import { Heading, HStack, Text, Pressable, IPressableProps } from 'native-base';
 import React, { FC } from 'react';
 
 export type SettingItemProps = {
   title: string;
   value?: string;
-};
+} & IPressableProps;
 
-export const SettingItem: FC<SettingItemProps> = ({ title, value }) => {
+export const SettingItem: FC<SettingItemProps> = ({
+  title,
+  value,
+  ...props
+}) => {
   return (
-    <VStack>
-      <Divider my="3" opacity="25" width="90%" />
-      <Heading
-        fontFamily="heading"
-        fontWeight={500}
-        fontSize="sm"
-        color="headings.light"
-        pb="1"
+    <Pressable width="100%" {...props}>
+      <HStack
+        alignItems="center"
+        backgroundColor="secondary.light"
+        borderRadius="2"
+        py="2"
+        px="2"
+        mt="1"
+        shadow="3"
       >
-        {title}
-      </Heading>
-      {value ? (
-        <Text fontFamily="body" color="primary.regular" fontSize="xs">
-          {value}
-        </Text>
-      ) : (
-        <Text
-          fontFamily="body"
-          color="primary.regular"
-          fontSize="xs"
-          opacity="70"
+        <Heading
+          fontFamily="heading"
+          fontWeight={500}
+          fontSize="sm"
+          color="headings.light"
         >
-          Has not been set yet
-        </Text>
-      )}
-    </VStack>
+          {title}
+        </Heading>
+        {value ? (
+          <Text
+            fontFamily="body"
+            color="primary.regular"
+            fontSize="sm"
+            ml="auto"
+          >
+            {value}
+          </Text>
+        ) : (
+          <Text
+            fontFamily="body"
+            color="primary.regular"
+            fontSize="sm"
+            opacity="70"
+            ml="auto"
+          >
+            Undefined
+          </Text>
+        )}
+      </HStack>
+    </Pressable>
   );
 };

@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import React, { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSigninWithEmailAndPassword } from '../api/signinWithEmailAndPassword';
+import { AUTH_INPUT_WIDTH } from '../constant/input';
 import { ControledInput } from 'Src/component/ControledInput';
 import { DefaultButton } from 'Src/component/DefaultButton';
 import { InputContainer } from 'Src/component/InputContainer';
@@ -42,7 +43,7 @@ export const ClassicSignin: FC = () => {
         <ControledInput
           isDisabled={isLoading}
           control={control}
-          width="280px"
+          width={AUTH_INPUT_WIDTH}
           key="email"
           placeholder="Email"
           name="email"
@@ -52,7 +53,7 @@ export const ClassicSignin: FC = () => {
         <ControledInput
           isDisabled={isLoading}
           control={control}
-          width="280px"
+          width={AUTH_INPUT_WIDTH}
           key="password"
           type="password"
           placeholder="Password"
@@ -62,7 +63,7 @@ export const ClassicSignin: FC = () => {
       <DefaultButton
         mb={6}
         maxWidth="100%"
-        width="280px"
+        width={AUTH_INPUT_WIDTH}
         text="Connexion"
         isLoading={isLoading}
         onPress={handleSubmit(onSubmit)}

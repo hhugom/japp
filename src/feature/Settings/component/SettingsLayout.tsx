@@ -1,15 +1,33 @@
 import { Text, VStack } from 'native-base';
 import React, { FC } from 'react';
+import * as Yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { SettingContainer } from './SettingContainer';
 import { SettingItem } from './SettingItem';
+import { BunProSettings } from './BunproSettings';
 import { JappUser } from 'Src/api/getUser';
+
+type FormData = {
+  wanikani_api_key: string;
+  bunpro_api_key: string;
+};
+
+const schema = Yup.object({
+  wanikani_api_key: Yup.string(),
+  bunpro_api_key: Yup.string(),
+});
 
 type SettingsLayoutProps = {
   user: JappUser;
 };
 
 export const SettingsLayout: FC<SettingsLayoutProps> = ({ user }) => {
-  console.log(user);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   return (
     <VStack
@@ -22,42 +40,16 @@ export const SettingsLayout: FC<SettingsLayoutProps> = ({ user }) => {
       testID="login-container"
       alignItems="center"
       p={4}
-      space={4}
+      space={3}
     >
       <SettingContainer title={'Information'}>
-        <Text
-          fontFamily="body"
-          fontSize="xs"
-          fontWeight={500}
-          color="primary.regular"
-        >
-          Manage your personal data like your email, your name or your profile
-          picture
-        </Text>
-        <SettingItem title="Email address" value={user.email} />
+        <SettingItem title="Email" value={user.email} />
+        <SettingItem title="Password" value="*********" />
       </SettingContainer>
       <SettingContainer title={'Wanikani'}>
-        <Text
-          fontFamily="body"
-          fontSize="xs"
-          fontWeight={500}
-          color="primary.regular"
-        >
-          Manage your Wanikani integration parameters
-        </Text>
-        <SettingItem title="Api key" value={user.wanikani_api_key} />
+        <SettingItem title="Key" value={user.wanikani_api_key} />
       </SettingContainer>
-      <SettingContainer title={'Bunpro'}>
-        <Text
-          fontFamily="body"
-          fontSize="xs"
-          fontWeight={500}
-          color="primary.regular"
-        >
-          Manage your Bunpro integration parameters
-        </Text>
-        <SettingItem title="Api key" value={user.bunpro_api_key} />
-      </SettingContainer>
+      <BunProSettings bunproKey={user.bunpro_api_key} />
     </VStack>
   );
 };

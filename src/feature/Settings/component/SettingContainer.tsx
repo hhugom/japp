@@ -11,13 +11,7 @@ export const SettingContainer: FC<SettingContainerProps> = ({
   children,
 }) => {
   return (
-    <Box
-      width="100%"
-      backgroundColor="secondary.light"
-      borderRadius="xs"
-      p="2"
-      shadow="4"
-    >
+    <Box width="100%" borderRadius="xs" p="2">
       <Heading
         fontFamily="heading"
         fontWeight={500}
