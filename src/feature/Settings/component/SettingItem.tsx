@@ -12,7 +12,7 @@ export const SettingItem: FC<SettingItemProps> = ({
   ...props
 }) => {
   return (
-    <Pressable width="100%" {...props}>
+    <Pressable width="100%" {...props} cursor="pointer">
       <HStack
         alignItems="center"
         backgroundColor="secondary.light"

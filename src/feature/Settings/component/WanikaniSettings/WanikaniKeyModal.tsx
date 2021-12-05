@@ -10,19 +10,19 @@ import { ControledInput } from 'Src/component/ControledInput';
 import { DefaultButton } from 'Src/component/DefaultButton';
 
 type FormData = {
-  bunpro_api_key: string;
+  wanikani_api_key: string;
 };
 
 const schema = Yup.object({
-  bunpro_api_key: Yup.string().required(),
+  wanikani_api_key: Yup.string().required(),
 });
 
 export type BunproKeyModalProps = {
-  bunproKey?: string;
+  wanikaniKey?: string;
 } & IModalProps;
 
-export const BunproKeyModal: FC<BunproKeyModalProps> = ({
-  bunproKey,
+export const WanikaniKeyModal: FC<BunproKeyModalProps> = ({
+  wanikaniKey,
   ...props
 }) => {
   const { updateUser } = useUpdateUser();
@@ -40,7 +40,6 @@ export const BunproKeyModal: FC<BunproKeyModalProps> = ({
   );
 
   const inputRef = useRef(null);
-  console.log(inputRef);
 
   return (
     <Modal {...props} initialFocusRef={inputRef} avoidKeyboard>
@@ -58,10 +57,10 @@ export const BunproKeyModal: FC<BunproKeyModalProps> = ({
           <ControledInput
             control={control}
             width="100%"
-            key="bunpro_api_key"
+            key="wanikani_api_key"
             placeholder="Your api key"
-            name="bunpro_api_key"
-            defaultValue={bunproKey}
+            name="wanikani_api_key"
+            defaultValue={wanikaniKey}
             size="lg"
             variant="outline"
             ref={inputRef}
