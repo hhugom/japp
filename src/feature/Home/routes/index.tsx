@@ -6,10 +6,6 @@ export const HomeRoutes = [
   // These are the same as the props you provide to <Route>
   {
     path: '/',
-    element: (
-      <RequireAuth>
-        <Home />
-      </RequireAuth>
-    ),
+    element: <RequireAuth>{(user) => <Home user={user} />}</RequireAuth>,
   },
 ];

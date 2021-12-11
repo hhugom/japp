@@ -2,6 +2,7 @@ export type ColorStructure = {
   regular: string;
   light: string;
   dark: string;
+  darker?: string;
 };
 
 export const colors = {
@@ -9,9 +10,10 @@ export const colors = {
     light: '#EBF8FF',
     regular: '#ADE1FF',
     dark: '#70CBFF',
+    darker: '#0AA5FF',
   },
   secondary: {
-    light: '#4E567E',
+    light: '#3E4565',
     regular: '#24283B',
     dark: '#101119',
   },

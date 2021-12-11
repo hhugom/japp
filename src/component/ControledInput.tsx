@@ -1,5 +1,5 @@
 import { IInputProps, Input } from 'native-base';
-import React, { FC } from 'react';
+import React, { FC, forwardRef } from 'react';
 import { Control, Controller } from 'react-hook-form';
 
 type ControlledInputProps = {
@@ -7,11 +7,9 @@ type ControlledInputProps = {
   name: string;
 };
 
-export const ControledInput: FC<ControlledInputProps & IInputProps> = ({
-  control,
-  name,
-  ...rest
-}) => {
+export const ControledInput: FC<
+  ControlledInputProps & IInputProps & React.RefAttributes<unknown>
+> = forwardRef(({ control, name, ...rest }, ref) => {
   return (
     <Controller
       control={control}
@@ -28,13 +26,13 @@ export const ControledInput: FC<ControlledInputProps & IInputProps> = ({
           color="primary.regular"
           variant="filled"
           rounded="0"
-          width="280px"
           maxWidth="100%"
           borderWidth={2}
           borderColor={errors[name] ? 'error.regular' : 'transparent'}
           defaultValue={value}
           onChangeText={onChange}
           onBlur={onBlur}
+          ref={ref}
           {...rest}
         />
       )}
@@ -42,4 +40,4 @@ export const ControledInput: FC<ControlledInputProps & IInputProps> = ({
       defaultValue=""
     />
   );
-};
+});

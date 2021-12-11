@@ -1,19 +1,21 @@
 import React, { FC, useCallback } from 'react';
 import { Box, Text } from 'native-base';
 import { getAuth } from '@firebase/auth';
-import { useGetUser } from 'Src/api/getUser';
 import { DefaultButton } from 'Src/component/DefaultButton';
 import { useSignOut } from 'Src/api/signOut';
 import { firebaseApp } from 'Src/lib/firebase';
+import { JappUser } from 'Src/api/getUser';
 
-export const Home: FC = () => {
+type HomeProps = {
+  user: JappUser;
+};
+export const Home: FC<HomeProps> = () => {
   const { signOut } = useSignOut();
   const auth = getAuth(firebaseApp);
   const onPress = useCallback(() => {
     signOut(auth);
   }, [auth, signOut]);
-  const { data, isLoading } = useGetUser();
-  console.log({ data, isLoading });
+
   return (
     <Box
       bg="secondary.regular"

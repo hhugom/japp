@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router';
 import { useSignupWithEmailAndPassword } from '../api/signupWithEmailAndPassword';
+import { AUTH_INPUT_WIDTH } from '../constant/input';
 import { AuthLayout } from './AuthLayout';
 import { ControledInput } from 'Src/component/ControledInput';
 import { InputContainer } from 'Src/component/InputContainer';
@@ -61,6 +62,7 @@ export const SignUp: FC = () => {
             control={control}
             name="email"
             placeholder="Email"
+            width={AUTH_INPUT_WIDTH}
           />
         </InputContainer>
         <InputContainer
@@ -76,6 +78,7 @@ export const SignUp: FC = () => {
               type="password"
               name="password"
               placeholder="Password"
+              width={AUTH_INPUT_WIDTH}
             />
           </HStack>
         </InputContainer>
@@ -92,6 +95,7 @@ export const SignUp: FC = () => {
             control={control}
             name="confirmPassword"
             placeholder="Confirm password"
+            width={AUTH_INPUT_WIDTH}
           />
         </InputContainer>
         <DefaultButton

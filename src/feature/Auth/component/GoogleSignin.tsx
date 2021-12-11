@@ -2,6 +2,7 @@ import { useIdTokenAuthRequest } from 'expo-auth-session/providers/google';
 import React, { FC } from 'react';
 import { DefaultButton } from '../../../component/DefaultButton';
 import { useSigninWithGoogle } from '../api/signinWithGoogle';
+import { AUTH_INPUT_WIDTH } from '../constant/input';
 export const GoogleSignin: FC = () => {
   const [, , googleAuth] = useIdTokenAuthRequest({
     clientId:
@@ -13,7 +14,7 @@ export const GoogleSignin: FC = () => {
     <DefaultButton
       mb={6}
       maxWidth="100%"
-      width="280px"
+      width={AUTH_INPUT_WIDTH}
       onPress={() => signinWithGoogle()}
       text="Google"
       isLoading={isLoading}
